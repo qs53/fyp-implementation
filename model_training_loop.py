@@ -5,8 +5,6 @@ import math
 from sklearn.metrics import confusion_matrix
 from keras.metrics import SparseCategoricalAccuracy
 
-final_status = ""
-
 class ModelTrainer:
     """The class definition to train models with the loss and restricted dynamic smapling methods specified.
     
@@ -89,7 +87,7 @@ class ModelTrainer:
             else:
                 percent_complete += (int(100 / epochs))
             progress_bar.progress(percent_complete)
-        final_status = status
+        self.final_status = status
         session_state.is_model_trained = percent_complete == 100
         if session_state.is_model_trained:
             session_state.trained_model = model

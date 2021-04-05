@@ -11,11 +11,11 @@ from collections import Counter
 from dynamic_sampling_data_generator import DynamicSamplingDataGenerator
 from focal_loss import SparseCategoricalFocalLoss
 from session_state import SessionState
-from model_training_loop import ModelTrainer, final_status
+from model_training_loop import ModelTrainer
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-session_state = SessionState.get(is_model_trained=False, trained_model=None, data_augmenter=None)
+session_state = SessionState.get(is_model_trained=False, trained_model=None, data_augmenter=None, model_trainer=None)
 
 td = None
 tl = None
@@ -179,23 +179,28 @@ if session_state.is_model_trained is False:
             model_trainer = ModelTrainer()
             model_trainer.train_model(model, epochs, train_generator, validation_generator, loss_fn, optimizer,
                         dynamic_sampling_start_epoch, session_state)
+            session_state.model_trainer = model_trainer
 
             with placeholder.beta_container():
                 save_model = st.button('Save Trained Model ')
-                st.info(final_status)
-                for _ in range(15):
+                st.info(model_trainer.final_status)
+                for _ in range(16):
                     st.text("")
 
 # Save trained model locally
 if session_state.is_model_trained:
     with placeholder.beta_container():
-        save_model = st.button('Save Trained Model')
+        c1, c2 = st.beta_columns([1,3])
+        with c1:
+            save_model = st.button('Save Trained Model')
+        st.info(session_state.model_trainer.final_status)
         root = tk.Tk()
         root.withdraw()
         root.wm_attributes('-topmost', 1)
         if save_model:
             directory = filedialog.askdirectory(master=root)
             if directory != "":
-                with st.spinner("Saving model to selected directory..."):
-                    session_state.trained_model.save(os.path.join(directory, "model.h5"))
-                    st.success("Model saved successfully to selected directory!")
+                with c2:
+                    with st.spinner("Saving model to selected directory..."):
+                        session_state.trained_model.save(os.path.join(directory, "model.h5"))
+                        st.success("Model saved successfully to selected directory!")

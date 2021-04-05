@@ -2,7 +2,6 @@ import tensorflow as tf
 import numpy as np
 import math
 
-
 class DynamicSamplingDataGenerator(tf.compat.v2.keras.utils.Sequence):
     """
     Data generator class definition to generate data on the fly when requested,
