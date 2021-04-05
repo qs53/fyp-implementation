@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module model_training_loop</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>model_training_loop</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Casus%5Cdocuments%5Cfinal%20year%5Cfyp%5Cmy%20thesis%20components%5Cimplementation%5Cweb%20application%5Cweb_app%5Cmodel_training_loop.py">c:\users\asus\documents\final year\fyp\my thesis components\implementation\web application\web_app\model_training_loop.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top><a href="streamlit.html">streamlit</a><br>
+</td><td width="25%" valign=top><a href="tensorflow.html">tensorflow</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="model_training_loop.html#ModelTrainer">ModelTrainer</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ModelTrainer">class <strong>ModelTrainer</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;class&nbsp;definition&nbsp;to&nbsp;train&nbsp;models&nbsp;with&nbsp;the&nbsp;loss&nbsp;and&nbsp;restricted&nbsp;dynamic&nbsp;smapling&nbsp;methods&nbsp;specified.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;```python<br>
+&nbsp;&nbsp;&nbsp;&nbsp;model_trainer&nbsp;=&nbsp;<a href="#ModelTrainer">ModelTrainer</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;model_trainer.<a href="#ModelTrainer-train_model">train_model</a>(model,&nbsp;epochs,&nbsp;train_generator,&nbsp;validation_generator,&nbsp;loss_fn,&nbsp;optimizer,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dynamic_sampling_start_epoch,&nbsp;session_state)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;```<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ModelTrainer-augmented_data"><strong>augmented_data</strong></a>(self, data_augmenter, class_instances)</dt><dd><tt>Augment&nbsp;data&nbsp;and&nbsp;return&nbsp;augmented&nbsp;class&nbsp;instances<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data_augmenter:&nbsp;data&nbsp;augmentation&nbsp;class&nbsp;<a href="builtins.html#object">object</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;class_instances:&nbsp;instances&nbsp;of&nbsp;class&nbsp;to&nbsp;augment</tt></dd></dl>
+
+<dl><dt><a name="ModelTrainer-reformulate_training_set"><strong>reformulate_training_set</strong></a>(self, model, train_generator, validation_generator, data_augmenter)</dt><dd><tt>Mutate&nbsp;training&nbsp;set&nbsp;after&nbsp;calculating&nbsp;class-wise&nbsp;F1&nbsp;scores.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;model:&nbsp;model&nbsp;to&nbsp;make&nbsp;predictions&nbsp;on&nbsp;validation&nbsp;set.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;train_generator:&nbsp;dynamic&nbsp;data&nbsp;generator&nbsp;that&nbsp;produces&nbsp;batch&nbsp;training&nbsp;data.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;validation_generator:&nbsp;dynamic&nbsp;data&nbsp;generator&nbsp;that&nbsp;produces&nbsp;batch&nbsp;validation&nbsp;data.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Used&nbsp;to&nbsp;calculate&nbsp;F1&nbsp;scores&nbsp;after&nbsp;validation&nbsp;predictions&nbsp;and&nbsp;labels&nbsp;compared.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data_augmenter:&nbsp;the&nbsp;data&nbsp;augmentation&nbsp;class&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;perform&nbsp;real-time&nbsp;data&nbsp;augmentation</tt></dd></dl>
+
+<dl><dt><a name="ModelTrainer-train_model"><strong>train_model</strong></a>(self, model: tensorflow.python.keras.engine.training.Model, epochs, train_generator, validation_generator, loss_fn, optimizer, dynamic_sampling_start_epoch, session_state)</dt><dd><tt>Trains&nbsp;the&nbsp;model<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;model:&nbsp;model&nbsp;instance&nbsp;for&nbsp;training.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;epochs:&nbsp;number&nbsp;of&nbsp;training&nbsp;epochs.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;train_generator:&nbsp;training&nbsp;batch&nbsp;data&nbsp;generator.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;validation_generator:&nbsp;validation&nbsp;batch&nbsp;data&nbsp;generator.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;loss_fn:&nbsp;instance&nbsp;of&nbsp;the&nbsp;`SparseCategoricalFocalLoss`&nbsp;class.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;optimizer:&nbsp;the&nbsp;minimization&nbsp;technique&nbsp;to&nbsp;update&nbsp;model's&nbsp;traininable&nbsp;weights.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dynamic_sampling_start_epoch:&nbsp;start&nbsp;epoch&nbsp;to&nbsp;start&nbsp;sampling&nbsp;dynamically.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;session_state:&nbsp;`SessionState`&nbsp;instance&nbsp;to&nbsp;store&nbsp;the&nbsp;trained&nbsp;model&nbsp;after&nbsp;successful&nbsp;training&nbsp;completion.&nbsp;It&nbsp;also&nbsp;stores<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;data&nbsp;augmentation&nbsp;class&nbsp;<a href="builtins.html#object">object</a></tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>final_status</strong> = ''</td></tr></table>
+</body></html>

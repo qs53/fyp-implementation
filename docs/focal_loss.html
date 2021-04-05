@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module focal_loss</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>focal_loss</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Casus%5Cdocuments%5Cfinal%20year%5Cfyp%5Cmy%20thesis%20components%5Cimplementation%5Cweb%20application%5Cweb_app%5Cfocal_loss.py">c:\users\asus\documents\final year\fyp\my thesis components\implementation\web application\web_app\focal_loss.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="tensorflow.keras.backend.html">tensorflow.keras.backend</a><br>
+<a href="tensorflow.python.ops.array_ops.html">tensorflow.python.ops.array_ops</a><br>
+<a href="tensorflow.python.ops.clip_ops.html">tensorflow.python.ops.clip_ops</a><br>
+</td><td width="25%" valign=top><a href="tensorflow.python.framework.constant_op.html">tensorflow.python.framework.constant_op</a><br>
+<a href="itertools.html">itertools</a><br>
+<a href="tensorflow.python.ops.math_ops.html">tensorflow.python.ops.math_ops</a><br>
+</td><td width="25%" valign=top><a href="tensorflow.python.ops.nn.html">tensorflow.python.ops.nn</a><br>
+<a href="tensorflow.python.framework.ops.html">tensorflow.python.framework.ops</a><br>
+<a href="tensorflow.html">tensorflow</a><br>
+</td><td width="25%" valign=top><a href="tensorflow.python.ops.variables.html">tensorflow.python.ops.variables</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="tensorflow.python.keras.losses.html#Loss">tensorflow.python.keras.losses.Loss</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="focal_loss.html#SparseCategoricalFocalLoss">SparseCategoricalFocalLoss</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SparseCategoricalFocalLoss">class <strong>SparseCategoricalFocalLoss</strong></a>(<a href="tensorflow.python.keras.losses.html#Loss">tensorflow.python.keras.losses.Loss</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#SparseCategoricalFocalLoss">SparseCategoricalFocalLoss</a>(gamma=2.0,&nbsp;alpha=None,&nbsp;from_logits=False,&nbsp;**kwargs)<br>
+&nbsp;<br>
+The&nbsp;class&nbsp;definition&nbsp;for&nbsp;focal&nbsp;loss&nbsp;function&nbsp;to&nbsp;reduce&nbsp;impact&nbsp;of&nbsp;easy&nbsp;instances<br>
+on&nbsp;the&nbsp;overall&nbsp;loss.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;```python<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loss_fn&nbsp;=&nbsp;<a href="#SparseCategoricalFocalLoss">SparseCategoricalFocalLoss</a>(gamma=2,&nbsp;alpha={0:1,1:3,2:2},&nbsp;from_logits=True)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;```<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="focal_loss.html#SparseCategoricalFocalLoss">SparseCategoricalFocalLoss</a></dd>
+<dd><a href="tensorflow.python.keras.losses.html#Loss">tensorflow.python.keras.losses.Loss</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SparseCategoricalFocalLoss-__init__"><strong>__init__</strong></a>(self, gamma=2.0, alpha=None, from_logits=False, **kwargs)</dt><dd><tt>Initializes&nbsp;`<a href="#SparseCategoricalFocalLoss">SparseCategoricalFocalLoss</a>`&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gamma:&nbsp;exponetial&nbsp;modulating&nbsp;factor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;class&nbsp;weights&nbsp;for&nbsp;higher&nbsp;impact&nbsp;of&nbsp;minority&nbsp;class.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from_logits:&nbsp;whether&nbsp;predictions&nbsp;are&nbsp;logits&nbsp;or&nbsp;not.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;kwargs:&nbsp;other&nbsp;arguments&nbsp;for&nbsp;parent&nbsp;`<a href="tensorflow.python.keras.losses.html#Loss">Loss</a>`&nbsp;class</tt></dd></dl>
+
+<dl><dt><a name="SparseCategoricalFocalLoss-call"><strong>call</strong></a>(self, y_true, y_pred)</dt><dd><tt>Invokes&nbsp;the&nbsp;`<a href="tensorflow.python.keras.losses.html#Loss">Loss</a>`&nbsp;instance.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;y_true:&nbsp;Ground&nbsp;truth&nbsp;values.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;y_pred:&nbsp;The&nbsp;predicted&nbsp;values.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="tensorflow.python.keras.losses.html#Loss">Loss</a>&nbsp;values&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;Tensor</tt></dd></dl>
+
+<dl><dt><a name="SparseCategoricalFocalLoss-get_config"><strong>get_config</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;config&nbsp;dictionary&nbsp;for&nbsp;a&nbsp;`<a href="#SparseCategoricalFocalLoss">SparseCategoricalFocalLoss</a>`&nbsp;instance.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="tensorflow.python.keras.losses.html#Loss">tensorflow.python.keras.losses.Loss</a>:<br>
+<dl><dt><a name="SparseCategoricalFocalLoss-__call__"><strong>__call__</strong></a>(self, y_true, y_pred, sample_weight=None)</dt><dd><tt>Invokes&nbsp;the&nbsp;`<a href="tensorflow.python.keras.losses.html#Loss">Loss</a>`&nbsp;instance.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;y_true:&nbsp;Ground&nbsp;truth&nbsp;values.&nbsp;shape&nbsp;=&nbsp;`[batch_size,&nbsp;d0,&nbsp;..&nbsp;dN]`,&nbsp;except<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sparse&nbsp;loss&nbsp;functions&nbsp;such&nbsp;as&nbsp;sparse&nbsp;categorical&nbsp;crossentropy&nbsp;where<br>
+&nbsp;&nbsp;&nbsp;&nbsp;shape&nbsp;=&nbsp;`[batch_size,&nbsp;d0,&nbsp;..&nbsp;dN-1]`<br>
+&nbsp;&nbsp;y_pred:&nbsp;The&nbsp;predicted&nbsp;values.&nbsp;shape&nbsp;=&nbsp;`[batch_size,&nbsp;d0,&nbsp;..&nbsp;dN]`<br>
+&nbsp;&nbsp;sample_weight:&nbsp;Optional&nbsp;`sample_weight`&nbsp;acts&nbsp;as&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;coefficient&nbsp;for&nbsp;the&nbsp;loss.&nbsp;If&nbsp;a&nbsp;scalar&nbsp;is&nbsp;provided,&nbsp;then&nbsp;the&nbsp;loss&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;simply&nbsp;scaled&nbsp;by&nbsp;the&nbsp;given&nbsp;value.&nbsp;If&nbsp;`sample_weight`&nbsp;is&nbsp;a&nbsp;tensor&nbsp;of&nbsp;size<br>
+&nbsp;&nbsp;&nbsp;&nbsp;`[batch_size]`,&nbsp;then&nbsp;the&nbsp;total&nbsp;loss&nbsp;for&nbsp;each&nbsp;sample&nbsp;of&nbsp;the&nbsp;batch&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;rescaled&nbsp;by&nbsp;the&nbsp;corresponding&nbsp;element&nbsp;in&nbsp;the&nbsp;`sample_weight`&nbsp;vector.&nbsp;If<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;shape&nbsp;of&nbsp;`sample_weight`&nbsp;is&nbsp;`[batch_size,&nbsp;d0,&nbsp;..&nbsp;dN-1]`&nbsp;(or&nbsp;can&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;broadcasted&nbsp;to&nbsp;this&nbsp;shape),&nbsp;then&nbsp;each&nbsp;loss&nbsp;element&nbsp;of&nbsp;`y_pred`&nbsp;is&nbsp;scaled<br>
+&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;the&nbsp;corresponding&nbsp;value&nbsp;of&nbsp;`sample_weight`.&nbsp;(Note&nbsp;on`dN-1`:&nbsp;all&nbsp;loss<br>
+&nbsp;&nbsp;&nbsp;&nbsp;functions&nbsp;reduce&nbsp;by&nbsp;1&nbsp;dimension,&nbsp;usually&nbsp;axis=-1.)<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;Weighted&nbsp;loss&nbsp;float&nbsp;`Tensor`.&nbsp;If&nbsp;`reduction`&nbsp;is&nbsp;`NONE`,&nbsp;this&nbsp;has<br>
+&nbsp;&nbsp;&nbsp;&nbsp;shape&nbsp;`[batch_size,&nbsp;d0,&nbsp;..&nbsp;dN-1]`;&nbsp;otherwise,&nbsp;it&nbsp;is&nbsp;scalar.&nbsp;(Note&nbsp;`dN-1`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;because&nbsp;all&nbsp;loss&nbsp;functions&nbsp;reduce&nbsp;by&nbsp;1&nbsp;dimension,&nbsp;usually&nbsp;axis=-1.)<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;ValueError:&nbsp;If&nbsp;the&nbsp;shape&nbsp;of&nbsp;`sample_weight`&nbsp;is&nbsp;invalid.</tt></dd></dl>
+
+<hr>
+Class methods inherited from <a href="tensorflow.python.keras.losses.html#Loss">tensorflow.python.keras.losses.Loss</a>:<br>
+<dl><dt><a name="SparseCategoricalFocalLoss-from_config"><strong>from_config</strong></a>(config)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Instantiates&nbsp;a&nbsp;`<a href="tensorflow.python.keras.losses.html#Loss">Loss</a>`&nbsp;from&nbsp;its&nbsp;config&nbsp;(output&nbsp;of&nbsp;`<a href="#SparseCategoricalFocalLoss-get_config">get_config</a>()`).<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;Output&nbsp;of&nbsp;`<a href="#SparseCategoricalFocalLoss-get_config">get_config</a>()`.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;`<a href="tensorflow.python.keras.losses.html#Loss">Loss</a>`&nbsp;instance.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="tensorflow.python.keras.losses.html#Loss">tensorflow.python.keras.losses.Loss</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-py_any"><strong>py_any</strong></a> = any(iterable, /)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;bool(x)&nbsp;is&nbsp;True&nbsp;for&nbsp;any&nbsp;x&nbsp;in&nbsp;the&nbsp;iterable.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;iterable&nbsp;is&nbsp;empty,&nbsp;return&nbsp;False.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>absolute_import</strong> = _Feature((2, 5, 0, 'alpha', 1), (3, 0, 0, 'alpha', 0), 262144)<br>
+<strong>division</strong> = _Feature((2, 2, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 131072)<br>
+<strong>print_function</strong> = _Feature((2, 6, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 1048576)</td></tr></table>
+</body></html>
