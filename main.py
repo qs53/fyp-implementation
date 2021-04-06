@@ -15,7 +15,7 @@ from model_training_loop import ModelTrainer
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-session_state = SessionState.get(is_model_trained=False, trained_model=None, data_augmenter=None, model_trainer=None)
+session_state = SessionState.get(is_model_trained=False, trained_model=None, data_augmenter=None, final_status=None, is_model_training=False)
 
 td = None
 tl = None
@@ -27,14 +27,14 @@ st.sidebar.write("""
 """)
 
 # Upload training set
-training_data = st.sidebar.file_uploader("Upload Training Data", type=["csv"])
+training_data = st.sidebar.file_uploader("Upload Training Data", type=["csv", "txt"])
 training_data_dims = st.sidebar.text_input('Reshape Training Data Dimensions (e.g. (40000,28,28,1)):')
 if training_data_dims != "":
     td = pd.read_csv(training_data).to_numpy()
     td = td.reshape(eval(training_data_dims))
 
 # Upload training labels
-training_labels = st.sidebar.file_uploader("Upload Training Labels", type=["csv"])
+training_labels = st.sidebar.file_uploader("Upload Training Labels", type=["csv", "txt"])
 training_label_dims = st.sidebar.text_input('Reshape Training Label Dimensions (e.g. (40000,)):')
 if training_label_dims != "":
     tl = pd.read_csv(training_labels).to_numpy()
@@ -45,14 +45,14 @@ st.sidebar.write("""
 """)
 
 # Upload validation set
-val_data = st.sidebar.file_uploader("Upload Validation Data", type=["csv"])
+val_data = st.sidebar.file_uploader("Upload Validation Data", type=["csv", "txt"])
 val_data_dims = st.sidebar.text_input('Reshape Validation Data Dimensions (e.g. (10000,28,28,1)):')
 if val_data_dims != "":
     vd = pd.read_csv(val_data).to_numpy()
     vd = vd.reshape(eval(val_data_dims))
 
 # Upload validation labels
-val_labels = st.sidebar.file_uploader("Upload Validation Labels", type=["csv"])
+val_labels = st.sidebar.file_uploader("Upload Validation Labels", type=["csv", "txt"])
 val_label_dims = st.sidebar.text_input('Reshape Validation Label Dimensions (e.g. (10000,)):')
 if val_label_dims != "":
     vl = pd.read_csv(val_labels).to_numpy()
@@ -106,7 +106,7 @@ if session_state.is_model_trained is False:
         else:
             from_logits = False
 
-        focal_kwargs = st.text_input('Keyword Arguments (e.g. name="focal_loss",...):')
+        focal_kwargs = st.text_input('Keyword Arguments (e.g. {name="focal_loss",...}):')
         if focal_kwargs != "":
             focal_kwargs = eval(focal_kwargs)
         else:
@@ -179,11 +179,11 @@ if session_state.is_model_trained is False:
             model_trainer = ModelTrainer()
             model_trainer.train_model(model, epochs, train_generator, validation_generator, loss_fn, optimizer,
                         dynamic_sampling_start_epoch, session_state)
-            session_state.model_trainer = model_trainer
+            session_state.final_status = model_trainer.final_status
 
             with placeholder.beta_container():
                 save_model = st.button('Save Trained Model ')
-                st.info(model_trainer.final_status)
+                st.info(session_state.final_status)
                 for _ in range(16):
                     st.text("")
 
@@ -193,7 +193,7 @@ if session_state.is_model_trained:
         c1, c2 = st.beta_columns([1,3])
         with c1:
             save_model = st.button('Save Trained Model')
-        st.info(session_state.model_trainer.final_status)
+        st.info(session_state.final_status)
         root = tk.Tk()
         root.withdraw()
         root.wm_attributes('-topmost', 1)
