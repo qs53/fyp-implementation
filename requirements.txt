@@ -5,3 +5,4 @@ pandas==1.2.3
 scikit-learn==0.24.1
 streamlit==0.79.0
 tensorflow==2.4.1
+tkinter==8.6
