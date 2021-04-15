@@ -15,10 +15,11 @@ class ModelTrainer:
                         dynamic_sampling_start_epoch, session_state)
         ```
     """
-    def train_model(self, model: tf.keras.Model, epochs, train_generator, validation_generator, loss_fn, optimizer,
-                    dynamic_sampling_start_epoch, session_state):
-        """Trains the model
-        
+
+    def __init__(self, model, epochs, train_generator, validation_generator, loss_fn, optimizer,
+                    dynamic_sampling_start_epoch):
+        """Initializes model trainer object
+
             Args:
                 model: model instance for training.
                 epochs: number of training epochs.
@@ -27,9 +28,29 @@ class ModelTrainer:
                 loss_fn: instance of the `SparseCategoricalFocalLoss` class.
                 optimizer: the minimization technique to update model's traininable weights.
                 dynamic_sampling_start_epoch: start epoch to start sampling dynamically.
+        """
+        self.model = model
+        self.epochs = epochs
+        self.train_generator = train_generator
+        self.validation_generator = validation_generator
+        self.loss_fn = loss_fn
+        self.optimizer = optimizer
+        self.dynamic_sampling_start_epoch = dynamic_sampling_start_epoch
+
+    def train_model(self, session_state):
+        """Trains the model
+        
+            Args:
                 session_state: `SessionState` instance to store the trained model after successful training completion. It also stores
                 the data augmentation class object
         """
+        model = self.model
+        epochs = self.epochs
+        train_generator = self.train_generator
+        validation_generator = self.validation_generator
+        loss_fn = self.loss_fn
+        optimizer = self.optimizer
+        dynamic_sampling_start_epoch = self.dynamic_sampling_start_epoch
         train_acc_metric = SparseCategoricalAccuracy()
         val_acc_metric = SparseCategoricalAccuracy()
         progress_bar = st.progress(0)
@@ -79,7 +100,7 @@ class ModelTrainer:
             # Update training set based on F1 scores
             if epoch < epochs - 1 and epoch >= dynamic_sampling_start_epoch: # Check if any need to sample dynamically
                 status += "Calculating class-wise F1 scores for dynamic sampling...  \n"
-                self.reformulate_training_set(model, train_generator, validation_generator, session_state.data_augmenter)
+                self.reformulate_training_set(session_state.data_augmenter)
                 with status_message.beta_container():
                     st.info(status)
             if epoch == epochs - 1:
@@ -92,16 +113,15 @@ class ModelTrainer:
         if session_state.is_model_trained:
             session_state.trained_model = model
 
-    def reformulate_training_set(self, model, train_generator, validation_generator, data_augmenter):
+    def reformulate_training_set(self, data_augmenter):
         """Mutate training set after calculating class-wise F1 scores.
         
             Args:
-                model: model to make predictions on validation set.
-                train_generator: dynamic data generator that produces batch training data.
-                validation_generator: dynamic data generator that produces batch validation data.
-                Used to calculate F1 scores after validation predictions and labels compared.
                 data_augmenter: the data augmentation class object to perform real-time data augmentation
         """
+        model = self.model
+        train_generator = self.train_generator
+        validation_generator = self.validation_generator
         y_true = np.array([])
         y_pred = np.array([])
         # Compute class-wise performance using validation data

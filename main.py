@@ -176,9 +176,9 @@ if session_state.is_model_trained is False:
                                                            dimensions=data_dimensions, classes=classes)
             validation_generator = DynamicSamplingDataGenerator(x_train=td, y_train=tl, batch_size=batch_size,
                                                                 dimensions=data_dimensions, classes=classes)
-            model_trainer = ModelTrainer()
-            model_trainer.train_model(model, epochs, train_generator, validation_generator, loss_fn, optimizer,
-                        dynamic_sampling_start_epoch, session_state)
+            model_trainer = ModelTrainer(model=model, epochs=epochs, train_generator=train_generator, validation_generator=validation_generator,
+                                         loss_fn=loss_fn, optimizer=optimizer, dynamic_sampling_start_epoch=dynamic_sampling_start_epoch)
+            model_trainer.train_model(session_state)
             session_state.final_status = model_trainer.final_status
 
             with placeholder.beta_container():
