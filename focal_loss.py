@@ -56,7 +56,6 @@ class SparseCategoricalFocalLoss(tf.keras.losses.Loss):
         Returns:
             Loss values in the form of a Tensor
         """
-        alpha = self.alpha
         gamma = self.gamma
         from_logits = self.from_logits
         axis = -1
@@ -126,9 +125,6 @@ class SparseCategoricalFocalLoss(tf.keras.losses.Loss):
         gamma = tf.convert_to_tensor(gamma, dtype=tf.dtypes.float32)
         scalar_gamma = gamma.shape.rank == 0
 
-        if alpha is not None:
-            alpha = tf.convert_to_tensor(alpha,
-                                         dtype=tf.dtypes.float32)
         y_true_rank = y_true.shape.rank
         if not scalar_gamma:
             gamma = tf.gather(gamma, y_true, axis=0, batch_dims=y_true_rank)
@@ -138,8 +134,4 @@ class SparseCategoricalFocalLoss(tf.keras.losses.Loss):
 
         loss = focal_modulation * loss
 
-        if alpha is not None:
-            alpha = tf.gather(alpha, y_true, axis=0,
-                              batch_dims=y_true_rank)
-            loss *= alpha
         return loss
