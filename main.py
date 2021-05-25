@@ -106,7 +106,7 @@ if session_state.is_model_trained is False:
         else:
             from_logits = False
 
-        focal_kwargs = st.text_input('Keyword Arguments (e.g. {name="focal_loss",...}):')
+        focal_kwargs = st.text_input('Keyword Arguments (e.g. {"name"="focal_loss",...}):')
         if focal_kwargs != "":
             focal_kwargs = eval(focal_kwargs)
         else:
